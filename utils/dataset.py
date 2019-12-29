@@ -1,3 +1,5 @@
+import random
+
 from os import listdir
 from os.path import isfile, join
 
@@ -23,8 +25,8 @@ class VertebraDataset(Dataset):
             images_path = join(path, "image")
             labels_path = join(path, "label")
 
-            images.append([self._image_preprocess(join(images_path, f)) for f in listdir(images_path) if isfile(join(images_path, f))])
-            labels.append([self._image_preprocess(join(labels_path, f)) for f in listdir(labels_path) if isfile(join(labels_path, f))])
+            images.extend([self._image_preprocess(join(images_path, f)) for f in listdir(images_path) if isfile(join(images_path, f))])
+            labels.extend([self._image_preprocess(join(labels_path, f)) for f in listdir(labels_path) if isfile(join(labels_path, f))])
 
         return images, labels
         
@@ -32,8 +34,8 @@ class VertebraDataset(Dataset):
         image = PIL.Image.open(image_path)
         image = image.resize((self.input_size, self.input_size), PIL.Image.ANTIALIAS)
 
-        image = np.array(image)
-        image = image[np.newaxis, ...]
+        #image = np.array(image)
+        #image = image[np.newaxis, ...]
 
         return image
 
@@ -54,9 +56,9 @@ class VertebraDataset(Dataset):
         #image = TF.crop(image, i, j, h, w)
         #landmark = TF.crop(landmark, i, j, h, w)
 
-        if random.random() > 0.5:
-            image = TF.hflip(image)
-            landmark = TF.hflip(landmark)
+        #if random.random() > 0.5:
+        #    image = TF.hflip(image)
+        #    landmark = TF.hflip(landmark)
 
         #resize = transforms.Resize(size=(self.input_size, self.input_size))
         #image = resize(image)
@@ -65,12 +67,19 @@ class VertebraDataset(Dataset):
         image = TF.to_tensor(image)
         label = TF.to_tensor(label)
 
-        return image, landmark
+        image = image.unsqueeze(0)
+        label = label.unsqueeze(0)
+
+        return image, label
+    def __len__(self):
+        return len(self.images)
     
     def __getitem__(self, idx):
         image = self.images[idx]
         label = self.labels[idx]
 
+        #image = PIL.Image.fromarray(image, "L")
+        #label = PIL.Image.fromarray(label, "L")
         image, label = self._transform(image, label)
 
         return image, label

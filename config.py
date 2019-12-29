@@ -5,8 +5,11 @@ CONFIG = {
     "ngpu" : 4,
     "dataloading" : {
         "batch_size" : 128,
-        "dataset_path" : "",
+        "dataset_path" : ["./data/f01/", "./data/f02/"],
         "num_workers" : 4,
+    },
+    "logging" : {
+        "path_to_log_file" : "./logs/logger/"
     },
     "optimizer" : {
         "lr" : 1e-1,
