@@ -14,7 +14,9 @@ CONFIG = {
     "optimizer" : {
         "lr" : 1e-1,
         "momentum" : 0.9,
-        "weigt_decay" : 0
+        "weigt_decay" : 0,
+        "step_size" : 10,
+        "scheduler_gamma" : 0.1
     },
     "train_settings" : {
         "epochs" : 150,

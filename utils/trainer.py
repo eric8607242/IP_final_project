@@ -36,7 +36,7 @@ class Trainer:
 
             outs = model(X)
             loss = self.criterion(outs, y)
-            loss = loss.mean()
+            #loss = loss.mean()
             loss.backward()
 
             self._intermediate_stats_logging(outs, y, loss, epoch, N, len_loader=len(loader), val_or_train="Train")
