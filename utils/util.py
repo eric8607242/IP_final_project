@@ -53,3 +53,6 @@ def save_image(image, image_path):
     image = (image.numpy().transpose(1, 2, 0) * 255.0).clip(0, 255).astype("uint8")
     image = Image.fromarray(image[:, :, 0], mode="L")
     image.save(image_path)
+
+def save(model, model_path):
+    torch.save(model.state_dict(), model_path)

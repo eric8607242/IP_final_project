@@ -6,7 +6,8 @@ CONFIG = {
     "dataloading" : {
         "classes" : 1,
         "batch_size" : 8,
-        "dataset_path" : ["./data/f01/", "./data/f02/"],
+        "train_dataset_path" : ["./data/f01/", "./data/f02/"],
+        "val_dataset_path" : ["./data/f03/"],
         "num_workers" : 0,
     },
     "logging" : {
@@ -22,7 +23,7 @@ CONFIG = {
     "train_settings" : {
         "epochs" : 200,
         "print_freq" : 1,
-        "path_to_save_model" : "",
+        "path_to_save_model" : "./logs/best.pth",
         "path_to_info" : ""
     }
 }
