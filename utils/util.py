@@ -1,5 +1,7 @@
 import logging
 
+import PIL.Image as Image
+
 from config import CONFIG
 
 class AverageMeter(object):
@@ -30,7 +32,7 @@ class AverageMeter(object):
 
 def get_loggers(file_path):
     logger = logging.getLogger("dpnet")
-    log_formats = "$(asctime)s | %(message)s"
+    log_formats = "%(asctime)s | %(message)s"
     formatter = logging.Formatter(log_formats, datefmt="%m/%d %I:%M:%S %[")
 
     file_handler = logging.FileHandler(file_path)
@@ -44,3 +46,10 @@ def get_loggers(file_path):
     logger.setLevel(logging.INFO)
 
     return logger
+
+
+def save_image(image, image_path):
+    image = image.clone().detach().cpu()
+    image = (image.numpy().transpose(1, 2, 0) * 255.0).clip(0, 255).astype("uint8")
+    image = Image.fromarray(image[:, :, 0], mode="L")
+    image.save(image_path)
