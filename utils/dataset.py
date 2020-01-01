@@ -27,7 +27,7 @@ class VertebraDataset(Dataset):
 
         paths = paths if isinstance(paths, list) else paths
         for path in paths:
-            images_path = join(path, "label")
+            images_path = join(path, "image")
             labels_path = join(path, "label")
 
             images.extend([self._image_preprocess(join(images_path, f)) for f in listdir(images_path) if isfile(join(images_path, f))])
@@ -65,8 +65,9 @@ class VertebraDataset(Dataset):
         image = TF.to_tensor(image)
         label = TF.to_tensor(label)
 
-        image[:, :100] = 0
-        image[:, -100:] = 0
+
+        image[0, :, :125] = 0
+        image[0, :, -125:] = 0
 
         return image, label
 

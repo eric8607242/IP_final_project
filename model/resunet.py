@@ -6,6 +6,7 @@ from torchvision import models
 def conv_relu(in_channesl, out_channesl, kernel, padding):
     return nn.Sequential(
                 nn.Conv2d(in_channesl, out_channesl, kernel, padding=padding),
+                nn.BatchNorm2d(out_channesl),
                 nn.ReLU(inplace=True)
             )
 

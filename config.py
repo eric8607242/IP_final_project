@@ -14,14 +14,14 @@ CONFIG = {
         "path_to_log_file" : "./logs/logger/"
     },
     "optimizer" : {
-        "lr" : 3e-4,
+        "lr" : 4e-4,
         "momentum" : 0.9,
-        "weigt_decay" : 0,
-        "step_size" : 50,
+        "weigt_decay" : 1e-5,
+        "step_size" : 150,
         "scheduler_gamma" : 0.1
     },
     "train_settings" : {
-        "epochs" : 200,
+        "epochs" : 400,
         "print_freq" : 1,
         "path_to_save_model" : "./logs/best.pth",
         "path_to_info" : ""

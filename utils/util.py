@@ -1,5 +1,6 @@
 import logging
 
+import torch
 import PIL.Image as Image
 
 from config import CONFIG
