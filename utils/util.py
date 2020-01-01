@@ -56,3 +56,8 @@ def save_image(image, image_path):
 
 def save(model, model_path):
     torch.save(model.state_dict(), model_path)
+
+
+def load_weight(model, weight_path):
+    state_dict = torch.load(weight_path)
+    model.load_state_dict(state_dict)
