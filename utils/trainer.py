@@ -23,6 +23,7 @@ class Trainer:
         self.path_to_save_model = CONFIG["train_settings"]["path_to_save_model"]
 
     def train_loop(self, train_loader, val_loader, model):
+        best_loss = 100.0
         for epoch in range(self.epochs):
             self.logger.info("Start to train for epoch %d" % (epoch))
             self._training_step(model, train_loader, epoch, info_for_logger="_training_step_")

@@ -2,6 +2,7 @@ import os
 from os.path import isfile, join
 import argparse
 
+import cv2
 import PIL.Image
 
 import torch
@@ -33,8 +34,24 @@ def demo(demo_path, checkpoint_path):
         image = image.to(device, non_blocking=True)
 
         out = model(image)
+        process_output(image, out)
 
     criterion = dice_loss
+
+def process_output(image, output_tensor):
+    image = image.clone().detach().cpu()
+    output_tensor = output_tensor.clone().detach().cpu()
+
+    output_array = np.array(output_tensor, np.uint8)
+    output_array = np.transpose(image_array, (1, 2, 0))
+
+    _, output_cnts, _ = cv2.findContours(output_array, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+    cv2.drawContours(image, output_cnts, -1, (0,0,255), 3)
+
+    cv2.imwrite("1.png", image)
+
 
 def get_demo_data(demo_path):
     images = []
@@ -52,6 +69,7 @@ def _image_preprocess(self, image_path):
     image = TF.to_tensor(image)
     image[:, :100] = 0
     image[:, -100:] = 0
+    image = image.unsqueeze(0)
 
     return image
 
