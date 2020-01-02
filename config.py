@@ -16,7 +16,7 @@ CONFIG = {
     "optimizer" : {
         "lr" : 4e-4,
         "momentum" : 0.9,
-        "weigt_decay" : 1e-5,
+        "weigt_decay" : 2e-5,
         "step_size" : 150,
         "scheduler_gamma" : 0.1
     },

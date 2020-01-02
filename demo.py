@@ -47,7 +47,7 @@ def process_output(image, output_tensor, output_path):
     output_tensor = output_tensor[0].clone().detach().cpu()*255
 
     output_array = np.array(output_tensor, np.uint8)
-    _, output_array = cv2.threshold(output_array, 200, 255, cv2.THRESH_BINARY)
+    _, output_array = cv2.threshold(output_array, 230, 255, cv2.THRESH_BINARY)
 
 
     image = np.array(image, np.uint8)
@@ -75,6 +75,9 @@ def _image_preprocess(image_path):
     image = image.convert("L")
 
     image = TF.to_tensor(image)
+
+    image = (image - image.min()) / (image.max() - image.min())
+
     image = image.unsqueeze(0)
 
     return image

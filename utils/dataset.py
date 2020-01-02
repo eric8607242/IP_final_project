@@ -65,6 +65,7 @@ class VertebraDataset(Dataset):
         image = TF.to_tensor(image)
         label = TF.to_tensor(label)
 
+        image = (image - image.min()) / (image.max() - image.min())
 
         image[0, :, :125] = 0
         image[0, :, -125:] = 0
