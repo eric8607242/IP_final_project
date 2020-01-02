@@ -2,9 +2,8 @@
 Vertebra Segmentation from Python using UNet with Resnet18 pretrained encoder.
 
 ### Input
-![image alt](./resource/vertebra.png =250x)
-![image alt](./resource/segment.png =250x)
-
+![](./resource/vertebra.png)
+![](./resource/segment.png)
 
 ## Installation
 ### Requirements
@@ -18,6 +17,17 @@ pip install -r requirements.txt
 python3 train.py
 ```
 
-## TODO
-- [ ] Validate
-- [ ] Bounding Box 
+### Demo
+```
+python3 demo.py [-h] --checkpoint-path CHECKPOINT_PATH --demo-image DEMO_IMAGE --output-path OUTPUT_PATH
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --checkpoint-path CHECKPOINT_PATH
+                        path to the checkpoint
+  --demo-image DEMO_IMAGE
+                        path to demo
+  --output-path OUTPUT_PATH
+                        path to output folder
+```
+
