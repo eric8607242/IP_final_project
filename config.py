@@ -6,15 +6,15 @@ CONFIG = {
     "dataloading" : {
         "classes" : 1,
         "batch_size" : 8,
-        "train_dataset_path" : ["./data/f01/", "./data/f02/"],
-        "val_dataset_path" : ["./data/f03/"],
+        "train_dataset_path" : ["./data/f02/", "./data/f03/"],
+        "val_dataset_path" : ["./data/f01/"],
         "num_workers" : 0,
     },
     "logging" : {
         "path_to_log_file" : "./logs/logger/"
     },
     "optimizer" : {
-        "lr" : 4e-4,
+        "lr" : 1e-3,
         "momentum" : 0.9,
         "weigt_decay" : 2e-5,
         "step_size" : 150,

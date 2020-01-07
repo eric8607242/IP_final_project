@@ -7,6 +7,7 @@ import cv2
 import PIL.Image
 import numpy as np
 
+import torch
 from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 import torchvision.transforms.functional as TF
@@ -62,10 +63,19 @@ class VertebraDataset(Dataset):
 
 
     def _transform(self, image, label):
+        transform = transforms.Compose([
+                transforms.ColorJitter(
+                        brightness=0.5,
+                        contrast=0.5,
+                        saturation=0.5,
+                        hue=0.5),
+            ])
+        image = transform(image)
         image = TF.to_tensor(image)
         label = TF.to_tensor(label)
 
         image = (image - image.min()) / (image.max() - image.min())
+        #image = torch.pow(image, 1.5)
 
         image[0, :, :125] = 0
         image[0, :, -125:] = 0

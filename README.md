@@ -27,6 +27,8 @@ optional arguments:
                         path to the checkpoint
   --demo-image DEMO_IMAGE
                         path to demo
+  --label-image LABEL_IMAGE
+                        path to label
   --output-path OUTPUT_PATH
                         path to output folder
 ```
